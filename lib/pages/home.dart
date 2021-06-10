@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -12,23 +11,26 @@ class _HomeState extends State<Home> {
   @override
   void initState(){
     super.initState();
-    SystemChrome.setPreferredOrientations([
+    SystemChrome.setPreferredOrientations([ // przy uruchomieniu ekranu startowego następuje zablokowanie orientacji urzadzenia.
       DeviceOrientation.portraitUp,
     ]);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[850],
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            'PoziomicApp',
+            'poziomicApp',
             style: TextStyle(
-              color: Colors.amber[600],
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
             ),
           ),
-          backgroundColor: Colors.grey[900],
+          backgroundColor: Colors.lightBlue[650],
           centerTitle: true,
         ),
         body: Column(
@@ -37,11 +39,11 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                ElevatedButton( // przycisk przenoszący do strony poziomicy
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.amber[600],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                    primary: Colors.lightBlue[600],
+                    shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.zero),
                     ),
                   ),
                   onPressed: () {
@@ -50,9 +52,10 @@ class _HomeState extends State<Home> {
                   child: Text(
                     'POZIOMUJ',
                     style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 32.0,
+                      color: Colors.white,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
                       letterSpacing: 1.0,
                     ),
                   ),
@@ -63,20 +66,31 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                ElevatedButton( // przycisk do sekcji o autorze
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.amber[600],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      )
+                      primary: Colors.yellow[600],
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.zero),
+                    ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/author');
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar( // sekcja o autorze w postaci snackbara na tym samym ekranie
+                      content: Text(
+                        '@Paweł Jackowski, 2021',
+                        style: TextStyle(
+                          color: Colors.lightBlue[600],
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      backgroundColor: Colors.yellow[600],
+                    ),
+                    );
                   },
                   child: Text(
                     'AUTOR',
                     style: TextStyle(
-                      color: Colors.grey[800],
+                      color: Colors.lightBlue[600],
                       fontSize: 32.0,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.0,
